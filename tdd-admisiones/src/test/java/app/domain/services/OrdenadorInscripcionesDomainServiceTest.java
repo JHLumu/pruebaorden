@@ -9,8 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith; 
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 class OrdenadorInscripcionesDomainServiceTest {
 
   
@@ -34,7 +38,7 @@ class OrdenadorInscripcionesDomainServiceTest {
 	  List<IInscripcion> resultado = ordenadorService.ordenar(lista);
 	 
 	  assertEquals(ordenada, resultado, "ERROR: ordenar() debe ordenar las inscripciones por créditos si no hay empate.");
-		
+	
 		
 	}
 	
