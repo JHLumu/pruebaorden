@@ -63,16 +63,14 @@ class OrdenadorInscripcionesDomainServiceTest {
 
 #### DEV1 ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/8804e0ea8e56a1e7c2852fa49a9275ceb1183239))
 
-Se implementa la lógica mínima en el servicio para ordenar la lista copiándola y usando un comparador por crédito.
+**DEV1.2 Correccion añadida para satisfacer 1.2** ([VerCommit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/cf4aee1387bbf081923015f4b0d6623d69f1b1ef))
 
+Se implementa la lógica de ordenación creando una copia de la lista y utilizando un comparador por crédito en orden inverso (descendente), tal como exigen los requisitos.
 ```java
 public List<IInscripcion> ordenar(List<IInscripcion> ins) {
-    // 1. Creamos una nueva lista para no modificar la original
-    List<IInscripcion> resultado = new ArrayList<>(ins);
-    
-    // 2. Ordenamos usando un comparador por crédito
-    resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito));
-    
-    return resultado;
-}
+    	List<IInscripcion> resultado = new ArrayList<>(ins);
+        resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed());
+        
+        return resultado;
+    }
 ```
