@@ -34,7 +34,7 @@ class OrdenadorInscripcionesDomainServiceTest {
 		
 	  List<IInscripcion> lista =List.of(inscripcionStub1, inscripcionStub2, inscripcionStub3);
 		
-	  List<IInscripcion> ordenada = List.of(inscripcionStub3, inscripcionStub1, inscripcionStub2);
+	  List<IInscripcion> ordenada = List.of(inscripcionStub2, inscripcionStub1, inscripcionStub3);
 	  List<IInscripcion> resultado = ordenadorService.ordenar(lista);
 	 
 	  assertEquals(ordenada, resultado, "ERROR: ordenar() debe ordenar las inscripciones por créditos si no hay empate.");
