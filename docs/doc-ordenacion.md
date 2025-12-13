@@ -69,7 +69,7 @@ class OrdenadorInscripcionesDomainServiceTest {
 Se implementa la lógica de ordenación creando una copia de la lista y utilizando un comparador por crédito en orden inverso (descendente), tal como exigen los requisitos.
 ```java
 public List<IInscripcion> ordenar(List<IInscripcion> ins) {
-    	List<IInscripcion> resultado = new ArrayList<>(ins);
+     List<IInscripcion> resultado = new ArrayList<>(ins);
         resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed());
         
         return resultado;
@@ -85,30 +85,30 @@ Se añade un nuevo test para que, en caso de que las inscripciones tengan el mis
 ```java
 
 @Test
-	void test_GivenInscripcionesConMismoCredito_WhenOrdenar_ThenReturnListaOrdenadaPorCreditos() {
-		
-		IInscripcion inscripcionStub1 = mock(IInscripcion.class);
-		IInscripcion inscripcionStub2 = mock(IInscripcion.class);
-		IInscripcion inscripcionStub3 = mock(IInscripcion.class);
-		
-		when(inscripcionStub1.getCredito()).thenReturn(10.0);
-		when(inscripcionStub2.getCredito()).thenReturn(10.0);
-		when(inscripcionStub3.getCredito()).thenReturn(10.0);
-		
-		when(inscripcionStub1.getCursosEnTematica()).thenReturn(4);
-		when(inscripcionStub2.getCursosEnTematica()).thenReturn(5);
-		when(inscripcionStub3.getCursosEnTematica()).thenReturn(3);
-		
-	    List<IInscripcion> lista =List.of(inscripcionStub1, inscripcionStub2, inscripcionStub3);
-	    List<IInscripcion> ordenada = List.of(inscripcionStub2, inscripcionStub1, inscripcionStub3);
-	    
-	    
-		List<IInscripcion> resultado = ordenadorService.ordenar(lista);
-		
-		assertEquals(ordenada, resultado, "ERROR: ordenar() debe ordenar las inscripciones por número de cursos en la temática en caso de que haya empate en crédito");
-		
-	}
-	
+ void test_GivenInscripcionesConMismoCredito_WhenOrdenar_ThenReturnListaOrdenadaPorCreditos() {
+  
+  IInscripcion inscripcionStub1 = mock(IInscripcion.class);
+  IInscripcion inscripcionStub2 = mock(IInscripcion.class);
+  IInscripcion inscripcionStub3 = mock(IInscripcion.class);
+  
+  when(inscripcionStub1.getCredito()).thenReturn(10.0);
+  when(inscripcionStub2.getCredito()).thenReturn(10.0);
+  when(inscripcionStub3.getCredito()).thenReturn(10.0);
+  
+  when(inscripcionStub1.getCursosEnTematica()).thenReturn(4);
+  when(inscripcionStub2.getCursosEnTematica()).thenReturn(5);
+  when(inscripcionStub3.getCursosEnTematica()).thenReturn(3);
+  
+     List<IInscripcion> lista =List.of(inscripcionStub1, inscripcionStub2, inscripcionStub3);
+     List<IInscripcion> ordenada = List.of(inscripcionStub2, inscripcionStub1, inscripcionStub3);
+     
+     
+  List<IInscripcion> resultado = ordenadorService.ordenar(lista);
+  
+  assertEquals(ordenada, resultado, "ERROR: ordenar() debe ordenar las inscripciones por número de cursos en la temática en caso de que haya empate en crédito");
+  
+ }
+ 
 
 ```
 
@@ -127,3 +127,40 @@ public List<IInscripcion> ordenar(List<IInscripcion> ins) {
 }
 ```
 
+### TEST 3  ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/52df87449b1fe04c619fc135691c2753c490186e))
+
+**TEST 3.1 (Necesario debido a un error en la implementación del test)**  ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/85a53dfa749b46a9ee2e9172fd6958fddd7dbf03))
+
+Se define un caso de prueba para comprobar que  `ordenar()` sigue el criterio de ordenación de antigüedad en la plataforma, en caso de que tanto el crédito y el número de cursos están empatados.
+
+```java
+
+ @Test 
+ void test_GivenInscripcionesConMismoCreditoYNumeroDeCursos_WhenOrdenar_ThenReturnListaOrdenadaPorAntiguedad() {
+  
+  IInscripcion inscripcionStub1 = mock(IInscripcion.class);
+  IInscripcion inscripcionStub2 = mock(IInscripcion.class);
+  IInscripcion inscripcionStub3 = mock(IInscripcion.class);
+  
+  when(inscripcionStub1.getCredito()).thenReturn(10.0);
+  when(inscripcionStub2.getCredito()).thenReturn(10.0);
+  when(inscripcionStub3.getCredito()).thenReturn(10.0);
+  
+  when(inscripcionStub1.getCursosEnTematica()).thenReturn(5);
+  when(inscripcionStub2.getCursosEnTematica()).thenReturn(5);
+  when(inscripcionStub3.getCursosEnTematica()).thenReturn(5);
+  
+  when(inscripcionStub1.getFechaAlta()).thenReturn(LocalDate.of(2025, 1, 1));
+  when(inscripcionStub2.getFechaAlta()).thenReturn(LocalDate.of(2024, 2, 7));
+  when(inscripcionStub3.getFechaAlta()).thenReturn(LocalDate.of(2025, 3, 15));
+  
+  
+  List<IInscripcion> lista =List.of(inscripcionStub1, inscripcionStub2, inscripcionStub3);
+  List<IInscripcion> ordenada = List.of(inscripcionStub2, inscripcionStub1, inscripcionStub3);
+  List<IInscripcion> resultado = ordenadorService.ordenar(lista);
+  assertEquals(ordenada, resultado, "ERROR: ordenar() debe ordenar las inscripciones por antigüedad si existe empate tanto en crédito como en número de cursos.");
+  
+  
+ }
+
+```
