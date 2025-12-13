@@ -164,3 +164,18 @@ Se define un caso de prueba para comprobar que  `ordenar()` sigue el criterio de
  }
 
 ```
+### DEV3 ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/26cde1827624f002ea806556b689706daf129906))
+
+Se añade el tercer criterio de ordenación. (orden ascendente de fecha).
+
+```java
+public List<IInscripcion> ordenar(List<IInscripcion> ins) {
+    List<IInscripcion> resultado = new ArrayList<>(ins);
+    
+    resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed()
+            .thenComparing(Comparator.comparingInt(IInscripcion::getCursosEnTematica).reversed())
+            .thenComparing(Comparator.comparing(IInscripcion::getFechaAlta)));
+    
+    return resultado;
+}
+
