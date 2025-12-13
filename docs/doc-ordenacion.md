@@ -111,3 +111,19 @@ Se añade un nuevo test para que, en caso de que las inscripciones tengan el mis
 	
 
 ```
+
+### DEV2 ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/c34967a10d1dad578c1989a5babf85660e5ee524))
+
+Se añade el segundo criterio de ordenación encadenando comparadores. En caso de empate a créditos, se ordena por quien tenga mayor número de cursos en la temática.
+
+```java
+public List<IInscripcion> ordenar(List<IInscripcion> ins) {
+    List<IInscripcion> resultado = new ArrayList<>(ins);
+    
+    resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed()
+            .thenComparing(Comparator.comparingInt(IInscripcion::getCursosEnTematica).reversed()));
+    
+    return resultado;
+}
+```
+
