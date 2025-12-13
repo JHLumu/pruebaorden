@@ -85,9 +85,10 @@ class OrdenadorInscripcionesDomainServiceTest {
 		when(inscripcionStub2.getCursosEnTematica()).thenReturn(5);
 		when(inscripcionStub3.getCursosEnTematica()).thenReturn(5);
 		
-		when(inscripcionStub3.getFechaAlta()).thenReturn(LocalDate.of(2025, 1, 1));
+		when(inscripcionStub1.getFechaAlta()).thenReturn(LocalDate.of(2025, 1, 1));
+		when(inscripcionStub2.getFechaAlta()).thenReturn(LocalDate.of(2024, 2, 7));
 		when(inscripcionStub3.getFechaAlta()).thenReturn(LocalDate.of(2025, 3, 15));
-		when(inscripcionStub3.getFechaAlta()).thenReturn(LocalDate.of(2024, 2, 7));
+		
 		
 		List<IInscripcion> lista =List.of(inscripcionStub1, inscripcionStub2, inscripcionStub3);
 		List<IInscripcion> ordenada = List.of(inscripcionStub2, inscripcionStub1, inscripcionStub3);
