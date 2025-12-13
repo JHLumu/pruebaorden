@@ -11,7 +11,8 @@ public class OrdenadorInscripcionesDomainService {
     public List<IInscripcion> ordenar(List<IInscripcion> ins) {
     	List<IInscripcion> resultado = new ArrayList<>(ins);
         resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed()
-        		.thenComparing(Comparator.comparingInt(IInscripcion::getCursosEnTematica).reversed()));
+        		.thenComparing(Comparator.comparingInt(IInscripcion::getCursosEnTematica).reversed())
+        		.thenComparing(Comparator.comparing(IInscripcion::getFechaAlta)));
         
         return resultado;
     }
