@@ -12,7 +12,8 @@ public class OrdenadorInscripcionesDomainService {
     	List<IInscripcion> resultado = new ArrayList<>(ins);
         resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed()
         		.thenComparing(Comparator.comparingInt(IInscripcion::getCursosEnTematica).reversed())
-        		.thenComparing(Comparator.comparing(IInscripcion::getFechaAlta)));
+        		.thenComparing(Comparator.comparing(IInscripcion::getFechaAlta))
+        		.thenComparingLong(IInscripcion::getId));
         
         return resultado;
     }
