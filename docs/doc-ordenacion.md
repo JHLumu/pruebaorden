@@ -112,7 +112,7 @@ Se añade un nuevo test para que, en caso de que las inscripciones tengan el mis
 
 ```
 
-### DEV2 ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/c34967a10d1dad578c1989a5babf85660e5ee524))
+#### DEV2 ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/c34967a10d1dad578c1989a5babf85660e5ee524))
 
 Se añade el segundo criterio de ordenación encadenando comparadores. En caso de empate a créditos, se ordena por quien tenga mayor número de cursos en la temática.
 
@@ -127,7 +127,9 @@ public List<IInscripcion> ordenar(List<IInscripcion> ins) {
 }
 ```
 
-### TEST 3  ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/52df87449b1fe04c619fc135691c2753c490186e))
+### Iteracion 3
+
+#### TEST 3  ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/52df87449b1fe04c619fc135691c2753c490186e))
 
 **TEST 3.1 (Necesario debido a un error en la implementación del test)**  ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/85a53dfa749b46a9ee2e9172fd6958fddd7dbf03))
 
@@ -178,4 +180,24 @@ public List<IInscripcion> ordenar(List<IInscripcion> ins) {
     
     return resultado;
 }
+```
+
+### Iteracion 4
+
+#### DEV4 ([Ver commit](https://github.com/asuliitoh/Calso2526_P6-grupo07/commit/215dd9aa0ffa7e6ec42abcc5c24b39e3579cd271))
+
+Se completa la lógica de ordenación añadiendo el criterio de desempate final por ID (menor ID primero).
+
+```java
+public List<IInscripcion> ordenar(List<IInscripcion> ins) {
+    List<IInscripcion> resultado = new ArrayList<>(ins);
+    
+    resultado.sort(Comparator.comparingDouble(IInscripcion::getCredito).reversed()
+            .thenComparing(Comparator.comparingInt(IInscripcion::getCursosEnTematica).reversed())
+            .thenComparing(Comparator.comparing(IInscripcion::getFechaAlta))
+            .thenComparingLong(IInscripcion::getId));
+    
+    return resultado;
+}
+```
 
